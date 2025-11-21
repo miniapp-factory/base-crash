@@ -56,3 +56,75 @@
 +```
 +
 +Generate an app logo and update the app metadata title and description.
+
+# 2025-11-21 15:38:56.384166
++IMPORTANT REQUIREMENTS:
++- The game must NEVER show empty spaces. After every match, tiles must always fall down correctly and new tiles must generate at the top without leaving gaps.
++- Ensure all DOM elements update properly at every step (swap, match, removal, falling, and refill).
++- Code must be clean, readable, and bug-free.
++
++GAME MECHANICS:
++- 6x6 grid.
++- Tile types: Base, OPENX, ETH, Gas, Pepe.
++- You may use emoji OR image files (base.svg, openx.svg, eth.svg, gas.svg, pepe.svg). If images are used, update the DOM with <img>.
++- Allow swapping two adjacent tiles (horizontal or vertical).
++- If the swap does not create a match, revert automatically.
++- Match-3 removes tiles and gives points.
++- Match-4 creates a “Super Token” that clears a full row.
++- Match-5 creates an “Onchain Blast” that clears a 3x3 area.
++- Continue match cascades until no matches remain.
++
++UI & FEATURES:
++- 60-second timer.
++- Real-time score display.
++- Local Top-10 leaderboard stored in localStorage.
++- “Share Score” button that copies text to clipboard.
++- Clean Base-themed UI (blue/white, minimal).
++- Mobile-friendly responsive design.
++- Smooth animations (pop, fade, drop).
++
++TECH NOTES:
++- Make the code well-organized and structured in a single index.html file.
++- Prevent any null, undefined, or empty tile values.
++- Ensure every tile always has a valid visual (emoji or image).
++- Ensure the refill logic works 100% reliably.
++
++FINAL GOAL:
++Deliver a fully working, clean, stable match-3 game with **zero empty cells**, ready for deployment in the OpenxAI x Base Mini-App Factory.
++
+
+# 2025-11-21 15:38:56.384821
++IMPORTANT REQUIREMENTS:
++- The game must NEVER show empty spaces. After every match, tiles must always fall down correctly and new tiles must generate at the top without leaving gaps.
++- Ensure all DOM elements update properly at every step (swap, match, removal, falling, and refill).
++- Code must be clean, readable, and bug-free.
++
++GAME MECHANICS:
++- 6x6 grid.
++- Tile types: Base, OPENX, ETH, Gas, Pepe.
++- You may use emoji OR image files (base.svg, openx.svg, eth.svg, gas.svg, pepe.svg). If images are used, update the DOM with <img>.
++- Allow swapping two adjacent tiles (horizontal or vertical).
++- If the swap does not create a match, revert automatically.
++- Match-3 removes tiles and gives points.
++- Match-4 creates a “Super Token” that clears a full row.
++- Match-5 creates an “Onchain Blast” that clears a 3x3 area.
++- Continue match cascades until no matches remain.
++
++UI & FEATURES:
++- 60-second timer.
++- Real-time score display.
++- Local Top-10 leaderboard stored in localStorage.
++- “Share Score” button that copies text to clipboard.
++- Clean Base-themed UI (blue/white, minimal).
++- Mobile-friendly responsive design.
++- Smooth animations (pop, fade, drop).
++
++TECH NOTES:
++- Make the code well-organized and structured in a single index.html file.
++- Prevent any null, undefined, or empty tile values.
++- Ensure every tile always has a valid visual (emoji or image).
++- Ensure the refill logic works 100% reliably.
++
++FINAL GOAL:
++Deliver a fully working, clean, stable match-3 game with **zero empty cells**, ready for deployment in the OpenxAI x Base Mini-App Factory.
++
