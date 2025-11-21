@@ -93,7 +93,7 @@ export function BaseCrash() {
     for (let y = 0; y < 6; y++) {
       let run = 1;
       for (let x = 1; x <= 6; x++) {
-        if (x < 6 && g[y][x] === g[y][x - 1]) {
+        if (x < 6 && g[y][x] !== null && g[y][x] === g[y][x - 1]) {
           run++;
         } else {
           if (run >= 3) {
@@ -112,7 +112,7 @@ export function BaseCrash() {
     for (let x = 0; x < 6; x++) {
       let run = 1;
       for (let y = 1; y <= 6; y++) {
-        if (y < 6 && g[y][x] === g[y - 1][x]) {
+        if (y < 6 && g[y][x] !== null && g[y][x] === g[y - 1][x]) {
           run++;
         } else {
           if (run >= 3) {
@@ -169,7 +169,7 @@ export function BaseCrash() {
           if (newGrid[y][x] !== null && newGrid[y][x] !== "") {
             if (empty !== y) {
               newGrid[empty][x] = newGrid[y][x];
-              newGrid[y][x] = "";
+              newGrid[y][x] = null;
             }
             empty--;
           }
