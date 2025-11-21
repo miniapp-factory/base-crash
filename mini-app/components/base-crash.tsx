@@ -178,6 +178,14 @@ export function BaseCrash() {
           newGrid[y][x] = randomTile();
         }
       }
+      // safety: ensure no nulls remain
+      for (let y = 0; y < 6; y++) {
+        for (let x = 0; x < 6; x++) {
+          if (newGrid[y][x] === null) {
+            newGrid[y][x] = randomTile();
+          }
+        }
+      }
     }
     setScore((s) => s + totalPoints);
     setGrid(newGrid);
