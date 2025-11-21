@@ -25,7 +25,7 @@ function randomTile() {
 }
 
 export function BaseCrash() {
-  const [grid, setGrid] = useState<string[][]>(
+  const [grid, setGrid] = useState<(string | null)[][]>(
     Array.from({ length: 6 }, () =>
       Array.from({ length: 6 }, () => randomTile())
     )
@@ -60,7 +60,7 @@ export function BaseCrash() {
         JSON.stringify(updated)
       );
     }
-  }, [gameOver]);
+  }, [gameOver, score]);
 
   const swap = (x1: number, y1: number, x2: number, y2: number) => {
     const newGrid = grid.map((row) => row.slice());
@@ -84,7 +84,7 @@ export function BaseCrash() {
     }
   };
 
-  const findMatches = (g: string[][]) => {
+  const findMatches = (g: (string | null)[][]) => {
     const matches: {
       type: "row" | "col" | "3" | "4" | "5";
       positions: [number, number][];
@@ -219,7 +219,7 @@ export function BaseCrash() {
             <div
               key={`${x}-${y}`}
               className="w-12 h-12 flex items-center justify-center rounded-md cursor-pointer bg-white shadow-sm"
-              style={{ backgroundColor: TILE_COLORS[tile] }}
+              style={{ backgroundColor: TILE_COLORS[tile] ?? "#FFFFFF" }}
               onClick={() => handleTileClick(x, y)}
             >
               <span className="text-2xl">{TILE_EMOJI[tile]}</span>
