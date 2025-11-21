@@ -130,7 +130,7 @@ export function BaseCrash() {
     return matches;
   };
 
-  const processMatches = (g: string[][]) => {
+  const processMatches = (g: (string | null)[][]) => {
     let newGrid = g.map((row) => row.slice());
     let totalPoints = 0;
     while (true) {
