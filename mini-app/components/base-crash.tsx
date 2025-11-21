@@ -150,7 +150,7 @@ export function BaseCrash() {
               const ny = cy + dy;
               const nx = cx + dx;
               if (ny >= 0 && ny < 6 && nx >= 0 && nx < 6)
-                newGrid[ny][nx] = "";
+                newGrid[ny][nx] = null;
             }
           }
           totalPoints += 50;
@@ -166,7 +166,7 @@ export function BaseCrash() {
       for (let x = 0; x < 6; x++) {
         let empty = 5;
         for (let y = 5; y >= 0; y--) {
-          if (newGrid[y][x] !== "") {
+          if (newGrid[y][x] !== null && newGrid[y][x] !== "") {
             if (empty !== y) {
               newGrid[empty][x] = newGrid[y][x];
               newGrid[y][x] = "";
