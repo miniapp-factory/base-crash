@@ -222,7 +222,7 @@ export function BaseCrash() {
               style={{ backgroundColor: TILE_COLORS[tile] ?? "#FFFFFF" }}
               onClick={() => handleTileClick(x, y)}
             >
-              <span className="text-2xl">{TILE_EMOJI[tile]}</span>
+              <span className="text-2xl">{tile ? TILE_EMOJI[tile] : ""}</span>
             </div>
           ))
         )}
