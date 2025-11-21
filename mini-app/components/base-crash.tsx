@@ -140,7 +140,7 @@ export function BaseCrash() {
         if (m.type === "4") {
           // clear entire row of the first position
           const row = m.positions[0][0];
-          for (let x = 0; x < 6; x++) newGrid[row][x] = "";
+          for (let x = 0; x < 6; x++) newGrid[row][x] = null;
           totalPoints += 30;
         } else if (m.type === "5") {
           // clear 3x3 area centered on first position
