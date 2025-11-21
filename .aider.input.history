@@ -234,3 +234,51 @@
 +Keep the code well-structured and easy to read.
 +IMPORTANT REQUIREMENTS to change
 +The game must never show empty spaces. After every match, tiles must always fall down correctly and new tiles must generate at the top without leaving gaps.
+
+# 2025-11-21 18:15:40.680093
++Use a 6×6 grid of tiles.
++Tile types: Base logo, ETH, Gas, OPENX, Pepe.
++Allow swapping two adjacent tiles (horizontal or vertical).
++If the swap forms a line of 3 identical tiles → remove them, give points, drop new tiles from above.
++Match of 4 creates a Super Token clearing one full row.
++Match of 5 creates an Onchain Blast clearing a 3×3 area.
++Add a 60-second countdown timer.
++After the timer ends, show the final score with a “Play Again” button.
++IMPORTANT REQUIREMENTS:
++The game must never show empty spaces. After every match, tiles must always fall down correctly and new tiles must generate at the top without leaving gaps.
++Add a Share Score button (for Farcaster/X).
++UI / Style Requirements:
++Web3/Base theme (blue, white, neon tones).
++Simple animations (pop, fade, bounce).
++Clean and mobile-friendly layout.
++Technical Requirements:
++Use only HTML, CSS, and JavaScript.
++Keep the logic optimized and minimal.
++No backend or external services required.
++Extras:
++Implement a local leaderboard storing Top-10 scores.
++Keep the code well-structured and easy to read.
+
+# 2025-11-21 18:15:40.680959
++Use a 6×6 grid of tiles.
++Tile types: Base logo, ETH, Gas, OPENX, Pepe.
++Allow swapping two adjacent tiles (horizontal or vertical).
++If the swap forms a line of 3 identical tiles → remove them, give points, drop new tiles from above.
++Match of 4 creates a Super Token clearing one full row.
++Match of 5 creates an Onchain Blast clearing a 3×3 area.
++Add a 60-second countdown timer.
++After the timer ends, show the final score with a “Play Again” button.
++IMPORTANT REQUIREMENTS:
++The game must never show empty spaces. After every match, tiles must always fall down correctly and new tiles must generate at the top without leaving gaps.
++Add a Share Score button (for Farcaster/X).
++UI / Style Requirements:
++Web3/Base theme (blue, white, neon tones).
++Simple animations (pop, fade, bounce).
++Clean and mobile-friendly layout.
++Technical Requirements:
++Use only HTML, CSS, and JavaScript.
++Keep the logic optimized and minimal.
++No backend or external services required.
++Extras:
++Implement a local leaderboard storing Top-10 scores.
++Keep the code well-structured and easy to read.
