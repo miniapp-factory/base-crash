@@ -128,3 +128,9 @@
 +FINAL GOAL:
 +Deliver a fully working, clean, stable match-3 game with **zero empty cells**, ready for deployment in the OpenxAI x Base Mini-App Factory.
 +
+
+# 2025-11-21 16:02:47.552319
++The game must NEVER show empty spaces. After every match, tiles must always fall down correctly and new tiles must generate at the top without leaving gaps.
+
+# 2025-11-21 16:02:47.557322
++The game must NEVER show empty spaces. After every match, tiles must always fall down correctly and new tiles must generate at the top without leaving gaps.
