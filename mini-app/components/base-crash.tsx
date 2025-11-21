@@ -157,7 +157,7 @@ export function BaseCrash() {
         } else {
           // 3
           m.positions.forEach(([y, x]) => {
-            newGrid[y][x] = "";
+            newGrid[y][x] = null;
           });
           totalPoints += 10;
         }
