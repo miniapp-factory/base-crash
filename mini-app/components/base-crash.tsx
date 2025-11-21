@@ -227,7 +227,7 @@ export function BaseCrash() {
             <div
               key={`${x}-${y}`}
               className="w-12 h-12 flex items-center justify-center rounded-md cursor-pointer bg-white shadow-sm"
-              style={{ backgroundColor: TILE_COLORS[tile] ?? "#FFFFFF" }}
+              style={{ backgroundColor: TILE_COLORS[tile ?? ""] ?? "#FFFFFF" }}
               onClick={() => handleTileClick(x, y)}
             >
               <span className="text-2xl">{tile ? TILE_EMOJI[tile] : ""}</span>
