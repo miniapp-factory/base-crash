@@ -1,3 +1,3 @@
-export const title = "Mini App Factory App";
-export const description = "This app was created by the Mini App Factory!";
+export const title = "Base Crash";
+export const description = "Play Base Crash, a match‑3 game themed around the Base ecosystem.";
 export const url = process.env.NEXT_PUBLIC_URL;

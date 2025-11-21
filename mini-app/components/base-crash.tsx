@@ -1,0 +1,190 @@
+"use client";
+import { useState, useEffect } from "react";
+import { Share } from "@/components/share";
+import { url } from "@/lib/metadata";
+import { Button } from "@/components/ui/button";
+
+const TILE_TYPES = ["base", "eth", "gas", "openx", "pepe"];
+const TILE_COLORS: Record<string, string> = {
+  base: "#1E90FF",
+  eth: "#3C3C3D",
+  gas: "#FF9900",
+  openx: "#00FF00",
+  pepe: "#FF69B4",
+};
+
+function randomTile() {
+  return TILE_TYPES[Math.floor(Math.random() * TILE_TYPES.length)];
+}
+
+export function BaseCrash() {
+  const [grid, setGrid] = useState<string[][]>([]);
+  const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(60);
+  const [selected, setSelected] = useState<{ x: number; y: number } | null>(null);
+  const [gameOver, setGameOver] = useState(false);
+
+  useEffect(() => {
+    const init = Array.from({ length: 6 }, () =>
+      Array.from({ length: 6 }, () => randomTile())
+    );
+    setGrid(init);
+  }, []);
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      setGameOver(true);
+      return;
+    }
+    const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  const swap = (x1: number, y1: number, x2: number, y2: number) => {
+    const newGrid = grid.map((row) => row.slice());
+    [newGrid[y1][x1], newGrid[y2][x2]] = [
+      newGrid[y2][x2],
+      newGrid[y1][x1],
+    ];
+    setGrid(newGrid);
+    checkMatches(newGrid);
+  };
+
+  const checkMatches = (g: string[][]) => {
+    const toRemove = new Set<string>();
+    // horizontal
+    for (let y = 0; y < 6; y++) {
+      let count = 1;
+      for (let x = 1; x < 6; x++) {
+        if (g[y][x] === g[y][x - 1]) count++;
+        else {
+          if (count >= 3) {
+            for (let k = 0; k < count; k++)
+              toRemove.add(`${y}-${x - 1 - k}`);
+          }
+          count = 1;
+        }
+      }
+      if (count >= 3) {
+        for (let k = 0; k < count; k++) toRemove.add(`${y}-${6 - 1 - k}`);
+      }
+    }
+    // vertical
+    for (let x = 0; x < 6; x++) {
+      let count = 1;
+      for (let y = 1; y < 6; y++) {
+        if (g[y][x] === g[y - 1][x]) count++;
+        else {
+          if (count >= 3) {
+            for (let k = 0; k < count; k++) toRemove.add(`${y - 1 - k}-${x}`);
+          }
+          count = 1;
+        }
+      }
+      if (count >= 3) {
+        for (let k = 0; k < count; k++) toRemove.add(`${6 - 1 - k}-${x}`);
+      }
+    }
+    if (toRemove.size === 0) return;
+    // scoring
+    let points = 0;
+    if (toRemove.size === 3) points = 10;
+    else if (toRemove.size === 4) points = 30;
+    else if (toRemove.size === 5) points = 50;
+    setScore((s) => s + points);
+    // remove and drop
+    const newGrid = g.map((row) => row.slice());
+    toRemove.forEach((pos) => {
+      const [y, x] = pos.split("-").map(Number);
+      newGrid[y][x] = "";
+    });
+    // drop
+    for (let x = 0; x < 6; x++) {
+      let empty = 5;
+      for (let y = 5; y >= 0; y--) {
+        if (newGrid[y][x] !== "" && empty !== y) {
+          newGrid[empty][x] = newGrid[y][x];
+          newGrid[y][x] = "";
+          empty--;
+        } else if (newGrid[y][x] === "") {
+          empty--;
+        }
+      }
+      for (let y = empty; y >= 0; y--) {
+        newGrid[y][x] = randomTile();
+      }
+    }
+    setGrid(newGrid);
+  };
+
+  const handleTileClick = (x: number, y: number) => {
+    if (gameOver) return;
+    if (selected === null) {
+      setSelected({ x, y });
+    } else {
+      const { x: sx, y: sy } = selected;
+      if (Math.abs(sx - x) + Math.abs(sy - y) === 1) {
+        swap(sx, sy, x, y);
+      }
+      setSelected(null);
+    }
+  };
+
+  const playAgain = () => {
+    setGrid(
+      Array.from({ length: 6 }, () =>
+        Array.from({ length: 6 }, () => randomTile())
+      )
+    );
+    setScore(0);
+    setTimeLeft(60);
+    setGameOver(false);
+  };
+
+  useEffect(() => {
+    if (gameOver) {
+      const top10 = JSON.parse(
+        localStorage.getItem("basecrash_leaderboard") || "[]"
+      );
+      const newEntry = { score, date: new Date().toISOString() };
+      const updated = [...top10, newEntry]
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10);
+      localStorage.setItem(
+        "basecrash_leaderboard",
+        JSON.stringify(updated)
+      );
+    }
+  }, [gameOver]);
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <div className="text-xl font-bold">Base Crash</div>
+      <div className="text-sm">
+        Score: {score}  Time: {timeLeft}s
+      </div>
+      <div className="grid grid-cols-6 gap-1">
+        {grid.map((row, y) =>
+          row.map((tile, x) => (
+            <div
+              key={`${x}-${y}`}
+              className="w-12 h-12 flex items-center justify-center rounded-md cursor-pointer"
+              style={{ backgroundColor: TILE_COLORS[tile] }}
+              onClick={() => handleTileClick(x, y)}
+            >
+              {tile.toUpperCase()}
+            </div>
+          ))
+        )}
+      </div>
+      {gameOver && (
+        <div className="flex flex-col items-center gap-2">
+          <div className="text-2xl font-bold">Game Over</div>
+          <div className="text-xl">Final Score: {score}</div>
+          <Button onClick={playAgain}>Play Again</Button>
+          <Share text={`I scored ${score} points in Base Crash! ${url}`} />
+        </div>
+      )}
+    </div>
+  );
+}
